@@ -36,6 +36,7 @@ class UserController extends Controller
 
         $path = $request->file('profile_picture')->store('images', 'public');
         DB::table('users')->where('email', session('email'))->update(['profile_picture' => $path]);
+        Session::put('profile_picture', $path);
 
         return redirect('/profile')->with('success', 'Profile picture updated successfully!');
     }
@@ -164,6 +165,7 @@ class UserController extends Controller
         if ($currentProfilePicture) {
             Storage::disk('public')->delete($currentProfilePicture);
             DB::table('users')->where('email', session('email'))->update(['profile_picture' => null]);
+            Session::forget('profile_picture');
             return redirect('/profile')->with('success', 'Profile picture removed successfully!');
         }
 
