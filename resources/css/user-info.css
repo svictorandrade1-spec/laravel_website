@@ -1,0 +1,113 @@
+/* === HEADER DO USUÁRIO === */
+.userinfo-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 50px;
+}
+
+.userinfo-header__avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.userinfo-header__avatar--empty {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* === TÍTULO DE POSTS === */
+.userinfo-posts-title {
+    text-align: center;
+}
+
+/* === WRAPPER EXTERNO === */
+.userinfo-posts-wrapper {
+    display: flex;
+    width: 100vw;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    gap: 5vw;
+}
+
+/* === FEED === */
+.userinfo-feed {
+    display: flex;
+    width: 100vw;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: auto;
+}
+
+/* === CARD DE POST === */
+.userinfo-post-card {
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+    width: 30vw;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+}
+
+.userinfo-post-card__header {
+    border: 1px solid black;
+    height: 5vh;
+    width: 95%;
+}
+
+/* === AVATAR === */
+.userinfo-post-card__avatar {
+    width: 7vh;
+    height: 7vh;
+    position: relative;
+    top: -50%;
+    transform: translateY(-50%);
+    left: 90%;
+}
+
+.userinfo-post-card__avatar--empty {
+    background-color: lightgray;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.userinfo-post-card__avatar-img {
+    max-width: 100%;
+    height: 100%;
+}
+
+/* === CORPO DO POST === */
+.userinfo-post-card__body {
+    border: 1px solid black;
+    height: 20vh;
+    width: 95%;
+    overflow: auto;
+}
+
+/* === IMAGEM DO POST === */
+.userinfo-post-card__post-img {
+    max-width: 100%;
+    height: 40vh;
+}
+
+/* === ÍCONE DE LINK === */
+.userinfo-post-card__link-icon {
+    max-width: 20px;
+    height: 20px;
+}

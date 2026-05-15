@@ -1,0 +1,16 @@
+/* === BODY === */
+.welcome-body {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Nunito', sans-serif;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* === FOOTER === */
+.welcome-footer {
+    text-align: center;
+    background-color: beige;
+    width: 100vw;
+    height: 6vw;
+}

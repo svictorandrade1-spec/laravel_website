@@ -1,0 +1,60 @@
+/* === HERO === */
+.home-hero {
+    width: 100vw;
+    height: 125vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: -10px;
+}
+
+.home-hero__img {
+    position: relative;
+    top: -90px;
+    width: 300px;
+    height: 300px;
+}
+
+.home-hero__title {
+    position: relative;
+    top: -130px;
+    font-size: 24px;
+}
+
+.home-hero__subtitle {
+    position: relative;
+    top: -90px;
+}
+
+/* === GALERIA === */
+.home-gallery {
+    display: flex;
+    gap: 0px;
+    flex-direction: row;
+    width: 100vw;
+    height: 58vw;
+    flex-wrap: wrap;
+}
+
+.home-gallery__img--small {
+    width: 20vw;
+    height: 29vw;
+}
+
+.home-gallery__img--wide {
+    width: 40vw;
+    height: 29vw;
+}
+
+/* === CTA === */
+.home-cta {
+    height: 15vw;
+    width: 60vw;
+    background-color: beige;
+    position: relative;
+    text-align: center;
+    top: -37vw;
+    left: 20vw;
+}

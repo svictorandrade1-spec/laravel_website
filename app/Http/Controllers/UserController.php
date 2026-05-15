@@ -12,8 +12,9 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    public function Checkposts(){
-$posts = DB::table('posts')
+    public function Checkposts()
+    {
+        $posts = DB::table('posts')
             ->leftJoin('users', 'posts.user_id', '=', 'users.user_id')
             ->select('posts.*', 'users.profile_picture as UserProfilePicture')
             ->orderBy('posts.created_at', 'desc')
@@ -28,7 +29,7 @@ $posts = DB::table('posts')
         if ($currentProfilePicture) {
             Storage::disk('public')->delete($currentProfilePicture);
         }
-        
+
         $request->validate([
             'profile_picture' => 'required|image|mimes:jpg,jpeg,png,gif,svg,webp|max:2048'
         ]);
@@ -39,35 +40,34 @@ $posts = DB::table('posts')
         return redirect('/profile')->with('success', 'Profile picture updated successfully!');
     }
 
-
     public function signup(Request $request)
     {
         $request->validate([
             'profile_picture' => 'nullable|image|mimes:jpg,jpeg,png,gif,svg,webp|max:2048'
         ]);
 
-    $path = $request->hasFile('profile_picture') ? $request->file('profile_picture')->store('images', 'public') : null;
-    $email = $request->input('email');
-    $checkname = DB::table('users')->where('name', $request->input('name'))->first();
-    if($checkname){
-        return view('SignUp', ['error' => 'Username already taken!']);
+        $path = $request->hasFile('profile_picture') ? $request->file('profile_picture')->store('images', 'public') : null;
+        $email = $request->input('email');
+        $checkname = DB::table('users')->where('name', $request->input('name'))->first();
+        if ($checkname) {
+            return view('SignUp', ['error' => 'Username already taken!']);
+        }
+        $check = DB::table('users')->where('email', $email)->first();
+        if ($check) {
+            return view('SignUp', ['error' => 'Email already has an account!']);
+        }
+        DB::table('users')->insert([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+            'profile_picture' => $path
+        ]);
+        Session::put('name', $request->input('name'));
+        Session::put('email', $request->input('email'));
+        Session::put('profile_picture', $path);
+        $posts = $this->Checkposts();
+        return view('Browser', ['posts' => $posts]);
     }
-    $check = DB::table('users')->where('email', $email)->first();
-    if($check){
-        return view('SignUp', ['error' => 'Email already has an account!']);
-    }
-    DB::table('users')->insert([
-        'name' => $request->input('name'),
-        'email' => $request->input('email'),
-        'password' => bcrypt($request->input('password')),
-        'profile_picture' => $path
-    ]);
-    Session::put('name', $request->input('name'));
-    Session::put('email', $request->input('email'));
-    $posts = $this->Checkposts();
-    return view('Browser', ['posts' => $posts]);
-    }
-
     public function signin(Request $request)
     {
         $email = $request->input('email');
@@ -78,12 +78,14 @@ $posts = DB::table('posts')
         if ($user && password_verify($password, $user->password)) {
             Session::put('name', $user->name);
             Session::put('email', $user->email);
+            Session::put('profile_picture', $user->profile_picture);
             $posts = $this->Checkposts();
             return view('Browser', ['posts' => $posts]);
         } else {
             return view('SignIn', ['error' => 'Invalid email or password!']);
         }
-    }public function browse()
+    }
+    public function browse()
     {
         if (!session('name')) {
             return view('SignIn', ['error' => 'Please sign in to access the browser!']);
@@ -111,18 +113,18 @@ $posts = DB::table('posts')
             'UserProfilePicture' => DB::table('users')->where('email', session('email'))->value('profile_picture')
         ]);
 
-        Schema::create("$postUUID"."comments", function (Blueprint $table) {
+        Schema::create("$postUUID" . "comments", function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email');
             $table->text('comment');
             $table->timestamps();
-
         });
 
         return redirect('/Browse')->with('success', 'Post uploaded successfully!');
     }
-    public function ThePostComments($postUUID){
+    public function ThePostComments($postUUID)
+    {
         $post = DB::table('posts')
             ->leftJoin('users', 'posts.user_id', '=', 'users.user_id')
             ->select('posts.*', 'users.profile_picture as UserProfilePicture', 'users.name as author_name')
@@ -169,8 +171,9 @@ $posts = DB::table('posts')
     }
 
 
-    
-    public function commenting(Request $request){
+
+    public function commenting(Request $request)
+    {
         $comment = $request->input('comment');
         $postUUID = session('postUUID');
 
@@ -207,7 +210,8 @@ $posts = DB::table('posts')
         return view('profile', ['user' => $user, 'posts' => $posts]);
     }
 
-    public function deletePost(Request $request){
+    public function deletePost(Request $request)
+    {
         $postUUID = $request->input('postUUID');
         $user_id = DB::table('users')->where('email', session('email'))->value('user_id');
         $post = DB::table('posts')->where('postUUID', $postUUID)->where('user_id', $user_id)->first();
@@ -227,15 +231,16 @@ $posts = DB::table('posts')
 
         return redirect('/profile')->with('success', 'Post deleted successfully!');
     }
-    
-    public function EditPost(Request $request, $postUUID){
+
+    public function EditPost(Request $request, $postUUID)
+    {
         $user_id = DB::table('users')->where('email', session('email'))->value('user_id');
         $post = DB::table('posts')->where('postUUID', $postUUID)->where('user_id', $user_id)->first();
         $isPostOwner = $post && $post->user_id === $user_id;
         if (!$isPostOwner) {
             return redirect('/profile')->with('error', 'Not today, thank you!');
         }
-        
+
         if (!$post) {
             return redirect('/profile')->with('error', 'Post not found!');
         }
@@ -246,7 +251,8 @@ $posts = DB::table('posts')
 
 
 
-    public function EditPosted(Request $request){
+    public function EditPosted(Request $request)
+    {
         $newText = $request->input('PostText');
         $postUUID = $request->input('postUUID');
         $user_id = DB::table('users')->where('email', session('email'))->value('user_id');
@@ -257,7 +263,8 @@ $posts = DB::table('posts')
         }
         if (!$post) {
             return redirect("/profile")->with('error', 'serião Morais?');
-        }if($newText ==null){
+        }
+        if ($newText == null) {
             return redirect("/EditPost/{$postUUID}")->with('error', 'Text cannot be empty!');
         }
 
@@ -286,7 +293,8 @@ $posts = DB::table('posts')
         return view('search', ['posts' => $posts, 'users' => $users, 'query' => $query]);
     }
 
-    public function UserInfo($user_name){
+    public function UserInfo($user_name)
+    {
         $user = DB::table('users')->where('name', $user_name)->first();
         if (!$user) {
             return abort(404, 'User not found');
@@ -299,7 +307,8 @@ $posts = DB::table('posts')
             ->get();
         return view('UserInfo', ['user' => $user, 'posts' => $posts]);
     }
-    public function deleteComment(Request $request){
+    public function deleteComment(Request $request)
+    {
         $comment_id = $request->input('comment_id');
         $postUUID = session('postUUID');
         $commentsTable = $postUUID . 'comments';

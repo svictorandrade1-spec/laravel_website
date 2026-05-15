@@ -20,10 +20,9 @@
 
         @endif
     </head>
-    <body style="margin: 0px; padding: 0px; font-family: 'Nunito', sans-serif; width: 100vw ; height: 100vh;">
- 
+<body class="welcome-body">
+
     @yield('content')
 
-<footer style="text-align: center;background-color:beige; width:100vw;height:6vw">developed by the great Soup ®</footer>
-    </body>
+</body>
 </html>
