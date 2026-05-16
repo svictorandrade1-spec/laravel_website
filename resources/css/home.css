@@ -1,4 +1,3 @@
-/* === HERO === */
 .home-hero {
     width: 100vw;
     height: 125vh;
@@ -28,7 +27,6 @@
     top: -90px;
 }
 
-/* === GALERIA === */
 .home-gallery {
     display: flex;
     gap: 0px;
@@ -48,7 +46,6 @@
     height: 29vw;
 }
 
-/* === CTA === */
 .home-cta {
     height: 15vw;
     width: 60vw;

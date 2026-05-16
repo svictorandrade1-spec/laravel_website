@@ -129,7 +129,6 @@
                 </div>
             </div>
 
-            {{-- Divisor posts --}}
             <div class="flex items-center px-6 py-4">
                 <span class="h-px flex-1 bg-gray-100"></span>
                 <span class="shrink-0 px-4 text-sm text-gray-400">Suas postagens</span>

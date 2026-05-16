@@ -13,7 +13,6 @@
 <body>
     <div class="sn-shell">
 
-        {{-- SIDEBAR --}}
         <aside class="sn-sidebar">
             <a href="/" class="sn-sidebar__logo">
                 <img src="https://media.istockphoto.com/id/1209262314/pt/vetorial/bowl-of-hot-soup-hand-drawn-doodle-icon-miso-soup-vector-sketch-illustration-cartoon.jpg?s=612x612&w=0&k=20&c=eFeugpUflQIVvES49u2M9C42wE3w1xtVJ-XwOfI0L-w="
@@ -60,7 +59,6 @@
             @endif
         </aside>
 
-        {{-- MAIN --}}
         <main class="sn-main sn-main--post">
 
             <div class="sn-post-back">
@@ -74,7 +72,6 @@
 
             <div class="sn-post-layout">
 
-                {{-- COLUNA DE COMENTÁRIOS (esquerda) --}}
                 <div class="sn-comments-col">
 
                     <span class="sn-divider">
@@ -135,7 +132,6 @@
                     </div>
                     @endforeach
 
-                    {{-- Formulário novo comentário --}}
                     @if(session('name'))
                     <div class="sn-new-comment">
                         <span class="sn-divider">
@@ -157,7 +153,6 @@
 
                 </div>
 
-                {{-- COLUNA DO POST (direita) --}}
                 <div class="sn-post-col">
                     <div class="sn-post-card">
 
@@ -210,7 +205,6 @@
         </main>
     </div>
 
-    {{-- Lightbox --}}
     <div class="sn-lightbox" id="sn-lightbox" onclick="this.classList.remove('sn-lightbox--open')">
         <img src="" alt="Imagem ampliada" class="sn-lightbox__img">
     </div>

@@ -48,7 +48,6 @@
             <form action="/sign-up" method="POST" enctype="multipart/form-data" class="mt-6">
                 @csrf
 
-                {{-- Input de arquivo oculto --}}
                 <input
                     type="file"
                     id="profile_picture"

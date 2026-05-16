@@ -4,119 +4,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoupNet - Navegação</title>
+    <title>SoupNet - Editar Post</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.png') }}">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+
 <body>
 
-<div class="edit-post-layout">
+    <div class="sn-shell">
 
-    <div class="edit-post-panel">
-        <div class="edit-post-card">
-            <div class="edit-post-card__header">
-                <p><strong>{{ $post->user_name }}</strong></p>
+        {{-- SIDEBAR --}}
+        <aside class="sn-sidebar">
+            <a href="/" class="sn-sidebar__logo">
+                <img src="https://media.istockphoto.com/id/1209262314/pt/vetorial/bowl-of-hot-soup-hand-drawn-doodle-icon-miso-soup-vector-sketch-illustration-cartoon.jpg?s=612x612&w=0&k=20&c=eFeugpUflQIVvES49u2M9C42wE3w1xtVJ-XwOfI0L-w="
+                    alt="SoupNet"
+                    class="sn-sidebar__logo-img">
+
+                <span class="sn-sidebar__logo-name">
+                    SoupNet
+                </span>
+            </a>
+
+            <nav class="sn-sidebar__nav">
+
+                <a href="/" class="sn-nav-item">
+                    <svg class="sn-nav-item__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                    </svg>
+
+                    Início
+                </a>
+
+                <a href="/Browse" class="sn-nav-item sn-nav-item--active">
+                    <svg class="sn-nav-item__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 15.803a7.5 7.5 0 0 0 10.607 0Z" />
+                    </svg>
+
+                    Navegar
+                </a>
+
+            </nav>
+
+            @if(session('name'))
+            <div class="sn-sidebar__user" onclick="window.location.href='/profile'">
+
+                <img class="sn-sidebar__user-avatar"
+                    src="{{ session('profile_picture') ? Storage::url(session('profile_picture')) : 'https://ui-avatars.com/api/?name=' . urlencode(session('name')) . '&background=fbbf24&color=fff&rounded=true' }}"
+                    alt="Avatar">
+
+                <div class="sn-sidebar__user-info">
+                    <span class="sn-sidebar__user-name">{{ session('name') }}</span>
+                    <span class="sn-sidebar__user-sub">Ver perfil</span>
+                </div>
+
             </div>
-            <div class="edit-post-card__body">
-                <p>{{ $post->text }}</p>
-            </div>
-            <div class="edit-post-card__image-wrapper">
-                <img src="{{ Storage::url($post->image_path) }}" alt="Post Image" class="edit-post-card__image">
-            </div>
-        </div>
-    </div>
+            @endif
 
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSD2YzuHj69tqYuCLnw_AnvX6AnWofdJGGScg&s" alt="Edit Post Image" class="edit-post-banner">
+        </aside>
 
-    <div class="edit-post-panel">
-        <div class="edit-post-card">
-            <div class="edit-post-card__header">
-                <p><strong>{{ $post->user_name }}</strong></p>
+        <main class="sn-main">
+
+            <div class="sn-main__topbar">
+                <h1 class="sn-main__title">
+                    Editar postagem
+                </h1>
             </div>
 
-            <form action="/EditPosted" method="POST">
-                @csrf
-                <input type="hidden" name="postUUID" value="{{ $post->postUUID }}">
-                <textarea name="PostText" class="edit-post-form__textarea" placeholder="Write your updated text here"></textarea>
-                <button type="submit" class="edit-post-form__btn">Save Changes</button>
-                @if(session('error'))
-                <p class="edit-post-form__error">{{ session('error') }}</p>
-                @endif
-            </form>
+            <div class="sn-edit-container">
 
-            <div class="edit-post-card__image-wrapper">
-                <img src="{{ Storage::url($post->image_path) }}" alt="Post Image" class="edit-post-card__image">
-            </div>
-        </div>
-    </div>
+                <div class="sn-edit-card">
 
-</div>
+                    <div class="sn-edit-card__label">
+                        Post original
+                    </div>
 
-    <footer class="bg-[#FFFDD0]">
+                    <div class="sn-card__header">
 
-        <div class="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+                        @if(!empty($post->UserProfilePicture))
+                        <img src="{{ Storage::url($post->UserProfilePicture) }}"
+                            alt="Avatar"
+                            class="sn-card__avatar">
+                        @else
+                        <img src="https://ui-avatars.com/api/?name={{ urlencode($post->user_name) }}&background=fbbf24&color=fff&rounded=true"
+                            alt="Avatar"
+                            class="sn-card__avatar">
+                        @endif
 
-            <div class="lg:flex lg:items-end lg:justify-between">
+                        <div>
+                            <div class="sn-card__username">
+                                {{ $post->user_name }}
+                            </div>
 
-                <div>
-
-                    <div class="flex items-center gap-4">
-
-                        <img
-                            src="https://media.istockphoto.com/id/1209262314/pt/vetorial/bowl-of-hot-soup-hand-drawn-doodle-icon-miso-soup-vector-sketch-illustration-cartoon.jpg?s=612x612&w=0&k=20&c=eFeugpUflQIVvES49u2M9C42wE3w1xtVJ-XwOfI0L-w="
-                            alt="SoupNet Logo"
-                            class="h-14 w-14 rounded-full object-cover">
-
-                        <h2 class="text-3xl font-bold text-[darkslategrey]">
-                            SoupNet
-                        </h2>
+                            <div class="sn-card__time">
+                                Publicação atual
+                            </div>
+                        </div>
 
                     </div>
 
-                    <p class="mt-6 max-w-md text-gray-600">
-                        Plataforma desenvolvida para compartilhar experiências através de uma experiência simples,
-                        moderna e intuitiva.
-                    </p>
+                    @if($post->text)
+                    <div class="sn-card__body">
+                        {{ $post->text }}
+                    </div>
+                    @endif
+
+                    @if($post->image_path)
+                    <div class="sn-edit-image-wrapper">
+                        <img src="{{ Storage::url($post->image_path) }}"
+                            alt="Imagem do post"
+                            class="sn-edit-image">
+                    </div>
+                    @endif
 
                 </div>
 
-                <ul class="mt-12 flex flex-col gap-3 lg:mt-0">
+                <div class="sn-edit-card">
 
-                    <li>
-                        <a class="text-lg font-medium text-gray-700 transition hover:text-teal-600" href="/">
-                            Início
-                        </a>
-                    </li>
+                    <div class="sn-edit-card__label">
+                        Atualizar conteúdo
+                    </div>
 
-                    <li>
-                        <a class="text-lg font-medium text-gray-700 transition hover:text-teal-600" href="/about">
-                            Sobre
-                        </a>
-                    </li>
+                    <form action="/EditPosted" method="POST" class="sn-edit-form-page">
 
-                    <li>
-                        <a class="text-lg font-medium text-gray-700 transition hover:text-teal-600" href="/browse">
-                            Navegar
-                        </a>
-                    </li>
+                        @csrf
 
+                        <input type="hidden"
+                            name="postUUID"
+                            value="{{ $post->postUUID }}">
 
-                    </li>
+                        <textarea
+                            name="PostText"
+                            class="sn-edit-page__textarea"
+                            placeholder="Atualize sua publicação...">{{ $post->text }}</textarea>
 
-                </ul>
+                        @if(session('error'))
+                        <div class="sn-error">
+                            {{ session('error') }}
+                        </div>
+                        @endif
+
+                        <div class="sn-edit-page__actions">
+
+                            <a href="/ThePost/{{ $post->postUUID }}"
+                                class="sn-edit-page__cancel">
+                                Cancelar
+                            </a>
+
+                            <button type="submit"
+                                class="sn-edit-page__submit">
+                                Salvar alterações
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
 
             </div>
 
-            <p class="mt-12 text-sm text-gray-600">
-                © 2026 SoupNet. All rights reserved.
-            </p>
+        </main>
 
-        </div>
-
-    </footer>
-    </footer>
+    </div>
 
 </body>
 
-</body>
+</html>

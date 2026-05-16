@@ -1,16 +1,10 @@
-/* ============================================
-   browse.css — SoupNet feed + ThePost
-   Usado por: browse.blade.php, ThePost.blade.php
-   ============================================ */
 
-/* ----- Shell / layout base ----- */
 .sn-shell {
     display: flex;
     min-height: 100vh;
     padding-top: 0;
 }
 
-/* ----- Sidebar ----- */
 .sn-sidebar {
     width: 240px;
     flex-shrink: 0;
@@ -131,7 +125,6 @@
     flex-shrink: 0;
 }
 
-/* ----- Main (feed) ----- */
 .sn-main {
     flex: 1;
     min-width: 0;
@@ -181,7 +174,6 @@
     height: 15px;
 }
 
-/* ----- Pesquisa ----- */
 .sn-search-form {
     display: flex;
     gap: 8px;
@@ -222,7 +214,6 @@
     color: #92400e;
 }
 
-/* ----- Error ----- */
 .sn-error {
     margin: 0.75rem 1.25rem;
     padding: 10px 14px;
@@ -233,13 +224,11 @@
     color: #b91c1c;
 }
 
-/* ----- Feed ----- */
 .sn-feed {
     display: flex;
     flex-direction: column;
 }
 
-/* ----- Card de post ----- */
 .sn-card {
     border-bottom: 1px solid #f3f4f6;
     padding: 1rem 1.25rem;
@@ -292,7 +281,6 @@
     margin-bottom: 10px;
 }
 
-/* ----- Imagem nos cards do feed ----- */
 .sn-card__img-wrapper {
     width: 100%;
     overflow: hidden;
@@ -341,7 +329,6 @@
     color: #eab308;
 }
 
-/* ----- Empty state ----- */
 .sn-empty {
     padding: 3rem 1.25rem;
     text-align: center;
@@ -349,7 +336,6 @@
     font-size: 14px;
 }
 
-/* ----- Paginação ----- */
 .sn-pagination {
     display: flex;
     justify-content: center;
@@ -392,7 +378,6 @@
     border-color: #eab308;
 }
 
-/* ----- Modal novo post ----- */
 .sn-modal {
     display: none;
     position: fixed;
@@ -533,7 +518,6 @@
     background: #ca8a04;
 }
 
-/* ----- Lightbox ----- */
 .sn-lightbox {
     display: none;
     position: fixed;
@@ -555,10 +539,6 @@
     border-radius: 10px;
     object-fit: contain;
 }
-
-/* ============================================
-   ThePost — layout específico
-   ============================================ */
 
 .sn-main--post {
     display: flex;
@@ -597,7 +577,6 @@
     min-height: calc(100vh - 53px);
 }
 
-/* ----- Coluna comentários (esquerda) ----- */
 .sn-comments-col {
     border-right: 1px solid #e5e7eb;
     padding: 1.25rem;
@@ -632,7 +611,6 @@
     padding: 1rem 0;
 }
 
-/* ----- Comentário individual ----- */
 .sn-comment {
     padding: 0.75rem 0;
     border-bottom: 1px solid #f3f4f6;
@@ -719,7 +697,6 @@
     color: #ef4444;
 }
 
-/* ----- Form editar comentário ----- */
 .sn-edit-form {
     margin-top: 8px;
     padding-left: 35px;
@@ -772,7 +749,6 @@
     cursor: pointer;
 }
 
-/* ----- Novo comentário ----- */
 .sn-new-comment {
     margin-top: auto;
     padding-top: 0.5rem;
@@ -821,7 +797,6 @@
     background: #ca8a04;
 }
 
-/* ----- Coluna do post (direita) ----- */
 .sn-post-col {
     padding: 1.25rem;
 }
@@ -855,7 +830,6 @@
     border-bottom: 1px solid #f3f4f6;
 }
 
-/* ----- Imagem na página do post (ThePost) ----- */
 .sn-post-card__img {
     width: 100%;
     height: auto;
@@ -909,7 +883,6 @@
     color: #ef4444;
 }
 
-/* ----- Responsivo básico ----- */
 @media (max-width: 768px) {
     .sn-sidebar {
         display: none;

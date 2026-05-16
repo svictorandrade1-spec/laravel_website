@@ -36,27 +36,19 @@
 
         <div class="flex items-center gap-4">
             <a
-                class="border-2 border-black bg-white px-5 py-3 font-semibold text-black shadow-[4px_4px_0_0] shadow-black hover:bg-yellow-200 focus:ring-2 focus:ring-yellow-300 focus:outline-0"
-                href="/SignIn">
-                <span class="relative z-10">Login</span>
+                href="/SignIn"
+                class="rounded-xl border border-yellow-300 bg-white px-5 py-2.5 text-sm font-semibold text-yellow-700 transition duration-200 hover:-translate-y-0.5 hover:border-yellow-400 hover:bg-yellow-50 hover:shadow-lg">
+                Login
             </a>
 
             <a
-                class="border-2 border-black bg-white px-5 py-3 font-semibold text-black shadow-[4px_4px_0_0] shadow-black hover:bg-yellow-200 focus:ring-2 focus:ring-yellow-300 focus:outline-0"
-                href="/signUp">
-                <span class="relative z-10">Cadastro</span>
+                href="/signUp"
+                class="rounded-xl bg-yellow-400 px-5 py-2.5 text-sm font-semibold text-white shadow-md transition duration-200 hover:-translate-y-0.5 hover:bg-yellow-500 hover:shadow-xl">
+                Cadastro
             </a>
-            @endif
-
-            @if (session('name'))
-            <img
-                class="w-10 h-10 rounded-full ring-2 ring-yellow-400 object-cover cursor-pointer transition hover:ring-yellow-500 hover:shadow-lg"
-                src="{{ session('profile_picture') ? Storage::url(session('profile_picture')) : 'https://ui-avatars.com/api/?name=' . urlencode(session('name')) . '&background=fbbf24&color=fff&rounded=true' }}"
-                alt="Avatar"
-                onclick="window.location.href='/profile'">
-            @endif
-
         </div>
+
+        @endif
 
     </header>
 

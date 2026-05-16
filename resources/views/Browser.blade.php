@@ -14,7 +14,6 @@
 
     <div class="sn-shell">
 
-        {{-- SIDEBAR --}}
         <aside class="sn-sidebar">
             <a href="/" class="sn-sidebar__logo">
                 <img src="https://media.istockphoto.com/id/1209262314/pt/vetorial/bowl-of-hot-soup-hand-drawn-doodle-icon-miso-soup-vector-sketch-illustration-cartoon.jpg?s=612x612&w=0&k=20&c=eFeugpUflQIVvES49u2M9C42wE3w1xtVJ-XwOfI0L-w="
@@ -60,10 +59,8 @@
             @endif
         </aside>
 
-        {{-- MAIN --}}
         <main class="sn-main">
 
-            {{-- Topo --}}
             <div class="sn-main__topbar">
                 <h1 class="sn-main__title">Feed</h1>
                 @if(session('name'))
@@ -76,7 +73,6 @@
                 @endif
             </div>
 
-            {{-- Pesquisa --}}
             <form action="/search" method="GET" class="sn-search-form">
                 <input type="text" name="query" placeholder="Pesquisar usuários e conteúdo..." class="sn-search-input">
                 <button type="submit" class="sn-search-btn">
@@ -90,7 +86,6 @@
             <div class="sn-error">{{ session('error') }}</div>
             @endif
 
-            {{-- Feed --}}
             <div class="sn-feed">
                 @forelse($posts as $post)
                 <article class="sn-card" onclick="window.location.href='/ThePost/{{ $post->postUUID }}'">
@@ -146,7 +141,6 @@
         </main>
     </div>
 
-    {{-- Modal novo post --}}
     <div class="sn-modal" id="sn-modal" onclick="if(event.target===this)this.classList.remove('sn-modal--open')">
         <div class="sn-modal__box">
             <div class="sn-modal__header">
@@ -177,7 +171,6 @@
         </div>
     </div>
 
-    {{-- Lightbox --}}
     <div class="sn-lightbox" id="sn-lightbox" onclick="this.classList.remove('sn-lightbox--open')">
         <img src="" alt="Imagem ampliada" class="sn-lightbox__img">
     </div>

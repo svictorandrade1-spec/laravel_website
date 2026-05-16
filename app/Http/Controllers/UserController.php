@@ -93,7 +93,6 @@ class UserController extends Controller
         }
 
         $posts = $this->Checkposts();
-        // return $posts;
         return view('Browser', ['posts' => $posts]);
     }
     public function upload(Request $request)
@@ -315,8 +314,6 @@ class UserController extends Controller
         $postUUID = session('postUUID');
         $commentsTable = $postUUID . 'comments';
         $comment = DB::table($commentsTable)->where('id', $comment_id)->first();
-        // $check1 = DB::table($commentsTable)->where('name', session('name'))->first();
-        // $check2 = DB::table('posts')->where('postUUID', $postUUID)->where('user_name', session('name'))->first();
 
         if (!$comment) {
             return redirect()->back()->with('error', 'Comment not found!');

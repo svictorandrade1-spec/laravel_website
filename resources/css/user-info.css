@@ -1,4 +1,3 @@
-/* === HEADER DO USUÁRIO === */
 .userinfo-header {
     display: flex;
     flex-direction: column;
@@ -24,12 +23,10 @@
     justify-content: center;
 }
 
-/* === TÍTULO DE POSTS === */
 .userinfo-posts-title {
     text-align: center;
 }
 
-/* === WRAPPER EXTERNO === */
 .userinfo-posts-wrapper {
     display: flex;
     width: 100vw;
@@ -41,7 +38,6 @@
     gap: 5vw;
 }
 
-/* === FEED === */
 .userinfo-feed {
     display: flex;
     width: 100vw;
@@ -50,7 +46,6 @@
     height: auto;
 }
 
-/* === CARD DE POST === */
 .userinfo-post-card {
     border: 1px solid #ccc;
     margin: 10px;
@@ -69,7 +64,6 @@
     width: 95%;
 }
 
-/* === AVATAR === */
 .userinfo-post-card__avatar {
     width: 7vh;
     height: 7vh;
@@ -92,7 +86,6 @@
     height: 100%;
 }
 
-/* === CORPO DO POST === */
 .userinfo-post-card__body {
     border: 1px solid black;
     height: 20vh;
@@ -100,14 +93,87 @@
     overflow: auto;
 }
 
-/* === IMAGEM DO POST === */
 .userinfo-post-card__post-img {
     max-width: 100%;
     height: 40vh;
 }
 
-/* === ÍCONE DE LINK === */
 .userinfo-post-card__link-icon {
     max-width: 20px;
     height: 20px;
+}
+
+.sn-user-banner {
+    position: relative;
+    border-bottom: 1px solid #f3f4f6;
+    background: #fff;
+}
+
+.sn-user-banner__cover {
+    height: 140px;
+    background: transparent;
+}
+
+.sn-user-banner__content {
+    position: relative;
+    padding: 0 1.5rem 1.5rem;
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-top: -55px;
+}
+
+.sn-user-banner__avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #fff;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    background: #fff;
+    flex-shrink: 0;
+}
+
+.sn-user-banner__info {
+    padding-bottom: 10px;
+}
+
+.sn-user-banner__info h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 4px;
+}
+
+.sn-user-banner__info p {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.sn-user-posts {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 768px) {
+
+    .sn-user-banner__cover {
+        height: 140px;
+    }
+
+    .sn-user-banner__content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-top: -45px;
+    }
+
+    .sn-user-banner__avatar {
+        width: 90px;
+        height: 90px;
+    }
+
+    .sn-user-banner__info h1 {
+        font-size: 22px;
+    }
 }
